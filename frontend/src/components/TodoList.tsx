@@ -6,8 +6,9 @@ import Input from "./ui/Input";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Textarea from "./ui/Textarea";
 import { axiosInstance } from "./config/axios.config";
-// import { faker } from '@faker-js/faker';
 import TodoSkeleton from "./TodoSkeleton";
+import { Trash2 } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 
 const TodoList = () => {
 
@@ -21,11 +22,6 @@ const TodoList = () => {
     id:0,title:"",des:""});
    const [todoAdd, setTodoAdd] = useState({title:"",des:""});
 
-  //  const [showBtnTodo, setShowBtnTodo] = useState<number | null>( null);
-  
-  //   const ouverBtnFc = (todoId: number) =>{
-  //     setShowBtnTodo(todoId); 
-  //   }
 
       const storageKey = 'loggedIn';
   const userDataString = localStorage.getItem(storageKey);
@@ -41,8 +37,6 @@ const TodoList = () => {
   }
 })
 
-
-  
    const onCloseEditModal = () =>{
     setIsopenEditModel(false)
     setTodoEdit({id:0,title:"",des:""})
@@ -81,34 +75,6 @@ const TodoList = () => {
       ...todoEdit,[name]: value
     })
   }
-
-  // const generateTodos = async () =>{
-        
-  //   for (let index = 0; index < 100; index++) {
-       
-  
-  //   try {
-  //       const {status}= await axiosInstance.post(`/todos/`,
-  //     {data:{title:faker.word.words(5),
-  //       des:faker.lorem.paragraph(2)
-  //     ,user:[userData.user.id]}},{
-  //       headers:{ 
-  //          Authorization: `Bearer ${userData.jwt}`,
-  //                 }
-  //     })
-
-  //     if(status === 200){
-        
-  //       setQueryversion(p => p + 1)
-  //     }
-      
-  //     } catch (error) {
-  //       console.log(error)
-  //     }  
-      
-
-  //   }
-  // }
 
   const onChangeAddTodoHandler = (e:
     ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
@@ -209,45 +175,29 @@ const TodoList = () => {
           onClick={() => onOpenCreateModal()}>
           Create New Todo
           </Button>
-
-          {/* <Button 
-          variant={"cancel"} size={"sm"} 
-          onClick={generateTodos}>
-          Take fake Todo
-          </Button> */}
           
           </div>
       
     
       { data?.todos.length ? 
-       data.todos.map((todo:ITodo,idx:number) => (
+       data.todos.reverse().map((todo:ITodo,idx:number) => (
             <div key={todo.id}  
             className="flex items-center justify-between
        hover:bg-gray-100 duration-300 p-3
        rounded-md even:bg-gray-100">
-        <p className="w-full font-semibold">{idx+1} - {todo.title}</p> 
-        <img src="" alt="" className="h-20" />
+        <p className="w-full font-semibold">{idx+1} - {todo.title} pomp</p> 
+        <p className="w-full font-semibold">{todo.des}</p>
 
         <div className="flex items-center justify-end w-full space-x-3">
-        {/* { showBtnTodo === todo.id && (
-          <> */}
+           
             <Button variant={"blue"} size={"sm"}
           onClick={() => onOpenEditModal(todo)}>
-          Edit</Button>
+          <Pencil/></Button>
           <Button variant={"danger"} size={"sm"} 
           onClick={() => onOpenRemoveModal(todo)}>
-            Remove
+            <Trash2 /> 
           </Button>
-          {/* </>
-         )} */}
           
-          {/* <Button className="bg-black"  size={"sm"}
-          onClick={() => {
-            if (todo.id !== undefined) {
-              ouverBtnFc(todo.id);
-            }}
-           } >
-            Button</Button> */}
         </div>
       </div>
          )
@@ -259,7 +209,7 @@ const TodoList = () => {
       {/* Edit partie */}
       <Modal closeModal={onCloseEditModal} isOpen={isopenEditModel}
       title="Edit Ths Product">
-        <form onSubmit={submitHandeler } className="space-y-1">
+        <form onSubmit={submitHandeler} className="space-y-1">
 
         <Input name='title' value={todoEdit.title} 
         onChange={onChangeHandler} />

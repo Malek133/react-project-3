@@ -2,7 +2,7 @@ import { cn } from "../../lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import { HTMLAttributes, ReactNode } from "react";
 
-const buttonVariants = cva("flex justify-center item-center rounded-md font-medium text-white duration-300 dark:text-black disabled:bg-indigo-400 disabled:hover:bg-indigo-700 disabled:cursor-not-allowed", {
+const buttonVariants = cva("flex justify-center item-center rounded-md font-normal text-white duration-300 dark:text-black disabled:bg-indigo-400 disabled:hover:bg-indigo-700 disabled:cursor-not-allowed", {
   variants: {
     variant: {
       // ** FILLED

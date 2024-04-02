@@ -8,10 +8,6 @@ const Navbar = () => {
   const userDataString = localStorage.getItem(storageKey);
   const userData = userDataString ? JSON.parse(userDataString) : null
 
-  // const {pathphone} = useLocation();
-  // const storageKeyp = 'Phone';
-  // const phoneDatas = localStorage.getItem(storageKeyp);
-  // const phoneData = phoneDatas ? JSON.parse(phoneDatas) : null
 
 const Logoutin = () =>{
   localStorage.removeItem(storageKey);
@@ -40,14 +36,6 @@ const Logoutin = () =>{
             font-medium ">
               {userData.user.username}</p>
             </NavLink> 
-
-            {/* <NavLink to="/Profile">
-            <p className="text-xl 
-            font-medium ">
-              {phoneData.user.phone}</p>
-            </NavLink>  */}
-
-           
 
             <Button fullWidth onClick={Logoutin}
             variant={"blue"}>
